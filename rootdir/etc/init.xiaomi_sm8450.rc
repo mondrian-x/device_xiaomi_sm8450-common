@@ -108,6 +108,10 @@ service vendor.nv_mac /vendor/bin/nv_mac
 
 # Enable suspend to RAM
     write /sys/power/mem_sleep "deep"
+    
+on property:sys.boot_completed=1
+    # Enable ZRAM on boot_complete
+    swapon_all /vendor/etc/fstab.qcom
 
 service vendor.audio-hal /vendor/bin/hw/android.hardware.audio.service
     override
